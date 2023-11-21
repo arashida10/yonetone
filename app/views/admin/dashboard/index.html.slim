@@ -1,0 +1,12 @@
+  .row
+    .col-2
+      .list-group
+        = link_to admin_shops_path, class: 'list-group-item list-group-item-action' do
+          | ショップ一覧
+        = link_to admin_admins_path, class: 'list-group-item list-group-item-action' do
+          | 店舗管理者一覧
+        = link_to admin_users_path, class: 'list-group-item list-group-item-action' do
+          | ユーザー一覧
+
+    .col-10
+      | 管理画面表示

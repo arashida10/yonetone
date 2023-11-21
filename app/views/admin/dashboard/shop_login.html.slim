@@ -1,0 +1,8 @@
+| 編集するショップを選択
+- if @shops
+  .list-group
+    - @shops.each do |shop|
+      = link_to shop.official_name, edit_admin_shop_path(shop), class: 'list-group-item list-group-item-action'
+- else
+  | 編集できるショップがありません
+

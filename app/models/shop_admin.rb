@@ -1,0 +1,2 @@
+class ShopAdmin < ApplicationRecord
+end

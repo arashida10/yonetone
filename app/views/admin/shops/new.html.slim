@@ -1,0 +1,40 @@
+h1 ショップ登録
+
+
+= form_with model: [:admin, @shop], local: true do |f|
+  .form-group.mb-3
+    = f.label :official_name, '店舗名'
+    = f.text_field :official_name, class: 'form-control'
+
+  .form-group.mb-3
+    = f.label :kana_name, '店舗名（かな）'
+    = f.text_field :kana_name, class: 'form-control'
+
+  .form-group.mb-3
+    = f.label :description, '店舗説明'
+    = f.text_field :description, class: 'form-control'
+
+  .form-group.mb-3
+    = f.label :primary_category, '大カテゴリ'
+    = f.select :primary_category, @shop_primary_categories || [], {selected: 1}, class: 'form-select'
+
+  .form-group.mb-3
+    = f.label :secondary_category, '中カテゴリ'
+    = f.select :secondary_category, @shop_secondary_categories || [], {selected: 1}, class: 'form-select'
+
+  .form-group.mb-3
+    = f.label :tel, '電話番号'
+    = f.telephone_field :tel, class: 'form-control'
+
+  .form-group.mb-3
+    = f.label :fax, 'FAX'
+    = f.telephone_field :fax, class: 'form-control'
+
+  .form-group.mb-3
+    = f.label :email, 'メールアドレス'
+    = f.email_field :email, class: 'form-control'
+
+  .form-group.mb-3
+    = f.label :address, '住所'
+    = f.text_field :address, class: 'form-control'
+  = f.submit '登録する', class: 'btn btn-primary'

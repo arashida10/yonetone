@@ -1,0 +1,7 @@
+= form_with model: [:admin, @shop_admin], local: true do |f|
+  .d-flex
+    = "「#{@shop.official_name}」に「#{@admin.name}」を管理者として追加します。"
+    = f.hidden_field :shop_id, value: @shop.id
+    = f.hidden_field :admins_id, value: @admin.id
+    p#user-name
+    = f.submit '登録する', class: 'btn btn-primary'

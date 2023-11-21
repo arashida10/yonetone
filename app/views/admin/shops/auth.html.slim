@@ -1,0 +1,16 @@
+h1 = "#{@shop.official_name} 権限設定"
+
+= form_with url: auth_confirm_admin_shop_path(@shop), local: false, method: :get do |f|
+  .d-flex
+    = f.text_field :email, type: "email", placeholder: 'メールアドレスを入力してください', class: 'form-control me-2'
+    = f.submit 'Search', name: nil, class: 'btn btn-outline-success'
+
+管理者一覧
+table.table.table-hover.table-striped
+  thead.thead-default
+    tr
+    th ユーザー名
+  tbody
+    - @role_users.each do |role_user|
+      tr
+        td = role_user.name

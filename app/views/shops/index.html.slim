@@ -1,0 +1,10 @@
+h1 ショップ一覧
+
+.row
+  - @shops.each do |shop|
+    .card.col-3.mb-3
+      = link_to("/shops/#{shop.id}")
+        / = image_tag('test/dummy.jpeg', alt: shop.official_name)
+        .card-body
+          h2.card-title= shop.official_name
+          p.card-text= shop.description

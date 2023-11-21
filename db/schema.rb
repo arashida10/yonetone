@@ -1,0 +1,103 @@
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema.define(version: 2023_07_17_082450) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "role", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "kana_name"
+    t.index "\"area_id\"", name: "index_areas_on_area_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.text "description"
+    t.integer "price"
+    t.string "shop_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shop_id"], name: "index_products_on_shop_id"
+  end
+
+  create_table "shop_admins", force: :cascade do |t|
+    t.string "admins_id"
+    t.string "shop_id"
+    t.string "role", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admins_id"], name: "index_shop_admins_on_admins_id"
+    t.index ["shop_id"], name: "index_shop_admins_on_shop_id"
+  end
+
+  create_table "shop_categories", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.integer "parent_id"
+    t.string "shop_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shop_id"], name: "index_shop_categories_on_shop_id"
+  end
+
+  create_table "shops", id: { type: :string, limit: 36 }, force: :cascade do |t|
+    t.string "official_name", default: "", null: false
+    t.string "kana_name"
+    t.string "description"
+    t.integer "primary_category", default: 1, null: false
+    t.integer "secondary_category", null: false
+    t.string "tel"
+    t.string "fax"
+    t.string "email"
+    t.string "address"
+    t.string "status", default: "draft", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "area_id"
+    t.index ["area_id"], name: "index_shops_on_area_id"
+    t.index ["id"], name: "index_shops_on_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "products", "shops"
+  add_foreign_key "shop_admins", "admins", column: "admins_id"
+  add_foreign_key "shop_admins", "shops"
+  add_foreign_key "shop_categories", "shops"
+  add_foreign_key "shops", "areas"
+end

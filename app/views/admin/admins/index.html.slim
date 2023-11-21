@@ -1,0 +1,23 @@
+h1 ショップ管理者一覧
+
+= link_to '新規登録', new_admin_admin_path, class: 'btn btn-primary'
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+    th= Admin.human_attribute_name(:name)
+    th= Admin.human_attribute_name(:email)
+    th= Admin.human_attribute_name(:created_at)
+    th= Admin.human_attribute_name(:updated_at)
+    th
+  tbody
+    - @shop_admins.each do |shop_admin|
+      tr
+        td= shop_admin.name
+        td= shop_admin.email
+        td= shop_admin.created_at
+        td= shop_admin.updated_at
+        td
+          = link_to '編集', edit_admin_admin_path(shop_admin), class: 'btn btn-primary mr-3'
+          = link_to '削除', [:admin, shop_admin], method: :delete, data: { confilm: "ユーザー「#{shop_admin.name}」⇨を削除します。よろしいですか？"}, class: 'btn btn-danger'

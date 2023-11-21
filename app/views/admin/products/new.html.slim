@@ -1,0 +1,17 @@
+h1 メニュー登録
+
+= form_with model: [:admin, @shop, @product], local: true do |f|
+  .form-group.mb-3
+    = f.label :name, '名前'
+    = f.text_field :name, class: 'form-control'
+  .form-group.mb-3
+    = f.label :description, '説明'
+    = f.text_area :description, class: 'form-control'
+  .form-group.mb-3
+    = f.label :price, '値段（税込）'
+    = f.text_field :price, class: 'form-control'
+  .form-group.mb-3
+    = f.label :menu_image, 'イメージ画像'
+    = f.file_field :menu_image, class: 'form-control'
+  = f.hidden_field :shop_id, value: @shop.id
+  = f.submit '登録する', class: 'btn btn-primary'
